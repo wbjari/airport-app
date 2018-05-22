@@ -6,6 +6,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { FlightComponent } from './flight/flight.component';
 import { SecurityComponent } from './security/security.component';
 import { RentalComponent } from './rental/rental.component';
+import { HomeComponent } from './core/home/home.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { RentalComponent } from './rental/rental.component';
     CustomerComponent,
     FlightComponent,
     SecurityComponent,
-    RentalComponent
+    RentalComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule
