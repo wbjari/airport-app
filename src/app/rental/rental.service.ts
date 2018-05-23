@@ -6,14 +6,16 @@ import { Observable } from 'rxjs/Observable';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+
+
 @Injectable()
 export class RentalService {
   rentalChanged = new Subject<Rental[]>();
   rentalAdded = new Subject<Rental>();
   rentalUpdated = new Subject<Rental>();
   rentalDeleted = new Subject<string>();
-
-  constructor(private http: Http) { }
+  
+    constructor(private http: Http) { }
 
   getRentals(): Observable<Rental[]> {
     const url = `${environment.apiUrl}/rental`;
@@ -68,4 +70,6 @@ export class RentalService {
       headers: headers
     };
   }
+
+
 }
