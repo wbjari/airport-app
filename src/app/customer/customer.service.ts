@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { Customer } from './customer.model';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs/Observable';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import 'rxjs/add/operator/map';
 

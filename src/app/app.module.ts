@@ -1,26 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { CustomerComponent } from './customer/customer.component';
-import { FlightComponent } from './flight/flight.component';
-import { SecurityComponent } from './security/security.component';
-import { RentalComponent } from './rental/rental.component';
-import { HomeComponent } from './core/home/home.component';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { CustomerModule } from './customer/customer.module';
+import { FlightModule } from './flight/flight.module';
+// import { RentalModule } from './rental/rental.module';
+import { SecurityModule } from './security/security.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    CustomerComponent,
-    FlightComponent,
-    SecurityComponent,
-    RentalComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule,
+    AppRoutingModule,
+    SharedModule,
+    CoreModule,
+    CustomerModule,
+    FlightModule,
+    // RentalModule,
+    SecurityModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
