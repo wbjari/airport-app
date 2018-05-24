@@ -1,25 +1,23 @@
-# base image
-FROM node:9.6.1
+﻿# Create image based on the official Node 6 image from dockerhub
+FROM node:8.11.2
 
-# install chrome for protractor tests
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -yq google-chrome-stable
+# Create a directory where our app will be placed
+RUN mkdir -p /usr/src/app
 
-# set working directory
-RUN mkdir /usr/src/app
+# Change directory so that our commands run inside this new directory
 WORKDIR /usr/src/app
 
-# add `/usr/src/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+# Copy dependency definitions
+COPY package.json /usr/src/app
 
-# install and cache app dependencies
-COPY package.json /usr/src/app/package.json
+# Install dependecies
 RUN npm install
-RUN npm install -g @angular/cli
 
-# add app
+# Get all the code needed to run the app
 COPY . /usr/src/app
 
-# start app
-CMD ng serve --host 0.0.0.0
+# Expose the port the app runs in
+EXPOSE 4200
+
+# Serve the app
+CMD ["npm", "host"]
