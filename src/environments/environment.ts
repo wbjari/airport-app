@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://spwa-server.herokuapp.com/api/v1'
+  apiUrl: 'http://localhost:3001/api/v1'
 };

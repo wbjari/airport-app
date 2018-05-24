@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{ flight?.name }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="btn-group" appDropdown>
+      <button type="button" class="btn btn-primary dropdown-toggle">
+        Manage Flight
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a style="cursor: pointer;" (click)="onEditFlight()">Edit Flight</a>
+        </li>
+        <li>
+          <a style="cursor: pointer;" (click)="onDeleteFlight()">Delete Flight</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

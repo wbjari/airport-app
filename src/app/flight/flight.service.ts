@@ -16,7 +16,7 @@ export class FlightService {
   constructor(private http: Http) { }
 
   getFlights(): Observable<Flight[]> {
-    const url = `${environment.apiUrl}/flight`;
+    const url = `${environment.apiUrl}/flights`;
     return this.http.get(url, this.getRequestOptions())
       .map(r => r.json())
       .map((flight: Flight[]) => {
@@ -25,7 +25,7 @@ export class FlightService {
   }
 
   getFlight(id: string): Observable<Flight> {
-    const url = `${environment.apiUrl}/flight/${id}`;
+    const url = `${environment.apiUrl}/flights/${id}`;
     return this.http.get(url, this.getRequestOptions())
       .map(r => r.json())
       .map((flight: Flight) => {
@@ -34,7 +34,7 @@ export class FlightService {
   }
 
   addFlight(flight: Flight): Observable<Flight> {
-    const url = `${environment.apiUrl}/flight`;
+    const url = `${environment.apiUrl}/flights`;
     const data = JSON.stringify(flight);
     return this.http.post(url, data, this.getRequestOptions())
       .map(r => r.json())
@@ -44,7 +44,7 @@ export class FlightService {
   }
 
   updateFlight(id: string, flight: Flight): Observable<Flight> {
-    const url = `${environment.apiUrl}/flight/${id}`;
+    const url = `${environment.apiUrl}/flights/${id}`;
     const data = JSON.stringify(flight);
     return this.http.put(url, data, this.getRequestOptions())
       .map(r => r.json())
@@ -54,7 +54,7 @@ export class FlightService {
   }
 
   deleteFlight(id: string) {
-    const url = `${environment.apiUrl}/flight/${id}`;
+    const url = `${environment.apiUrl}/flights/${id}`;
     return this.http.delete(url, this.getRequestOptions())
       .map(r => r.json());
   }
