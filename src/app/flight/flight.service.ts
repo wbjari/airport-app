@@ -48,10 +48,9 @@ export class FlightService {
     const data = JSON.stringify(flight);
     console.log(url);
     console.log(data);
-    return this.http.post(url, data, this.getRequestOptions())
+    return this.http.put(url, data, this.getRequestOptions())
       .map(r => r.json())
       .map((savedFlight: Flight) => {
-        console.log("test");
         return new Flight(savedFlight._id, savedFlight.name, savedFlight.date, savedFlight.departure, savedFlight.arrival, savedFlight.location);
       });
   }
