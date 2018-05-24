@@ -5,13 +5,14 @@ import {Buffer } from 'buffer';
 
 @Injectable()
 export class NotificationSender {
-  amqp = new Amqp();
-  constructor(){}
+
+  constructor(){  }
 
   sendFlightNotification(){
   
 //  const amqp = 'amqplib/callback_api';
-const conn = this.amqp.connect('amqp://localhost')
+const amqp = new Amqp();
+const conn = amqp.connect('amqp://localhost')
   conn.createChannel(function(err, ch) {
     var q = 'flightC';
     var msg = 'New Flight Created!';
