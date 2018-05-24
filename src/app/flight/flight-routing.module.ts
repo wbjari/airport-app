@@ -10,9 +10,9 @@ const flightRoutes: Routes = [
   {
     path: '', component: FlightComponent, children: [
       { path: '', component: FlightListComponent },
-      { path: 'new', component: FlightEditComponent },
-      { path: ':id', component: FlightDetailComponent },
-      { path: ':id/edit', component: FlightEditComponent },
+      { path: 'flights/new', component: FlightEditComponent },
+      { path: 'flights/:id', component: FlightDetailComponent },
+      { path: 'flights/:id/edit', component: FlightEditComponent },
     ]
   },
 ];

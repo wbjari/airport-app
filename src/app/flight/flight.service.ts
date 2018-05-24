@@ -46,9 +46,12 @@ export class FlightService {
   updateFlight(id: string, flight: Flight): Observable<Flight> {
     const url = `${environment.apiUrl}/flights/${id}`;
     const data = JSON.stringify(flight);
-    return this.http.put(url, data, this.getRequestOptions())
+    console.log(url);
+    console.log(data);
+    return this.http.post(url, data, this.getRequestOptions())
       .map(r => r.json())
       .map((savedFlight: Flight) => {
+        console.log("test");
         return new Flight(savedFlight._id, savedFlight.name, savedFlight.date, savedFlight.departure, savedFlight.arrival, savedFlight.location);
       });
   }
