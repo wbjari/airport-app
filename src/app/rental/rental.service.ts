@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { NotificationSender } from '../shared/messagebroker/send';
 
 
 
@@ -15,7 +16,7 @@ export class RentalService {
   rentalUpdated = new Subject<Rental>();
   rentalDeleted = new Subject<string>();
   
-    constructor(private http: Http) { }
+    constructor(private http: Http, private notification: NotificationSender) { }
 
   getRentals(): Observable<Rental[]> {
     const url = `${environment.apiUrl}/rental`;

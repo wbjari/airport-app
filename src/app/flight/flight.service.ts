@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { NotificationSender } from '../shared/messagebroker/send';
 
 @Injectable()
 export class FlightService {
@@ -13,13 +14,14 @@ export class FlightService {
   flightUpdated = new Subject<Flight>();
   flightDeleted = new Subject<string>();
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private notification: NotificationSender) { }
 
   getFlights(): Observable<Flight[]> {
     const url = `${environment.apiUrl}/flights`;
     return this.http.get(url, this.getRequestOptions())
       .map(r => r.json())
       .map((flight: Flight[]) => {
+        this.notification.sendFlightNotification();
         return flight.map(flight => new Flight(flight._id, flight.name, flight.date, flight.departure, flight.arrival, flight.location));
       });
   }
@@ -27,8 +29,9 @@ export class FlightService {
   getFlight(id: string): Observable<Flight> {
     const url = `${environment.apiUrl}/flights/${id}`;
     return this.http.get(url, this.getRequestOptions())
-      .map(r => r.json())
-      .map((flight: Flight) => {
+    .map(r => r.json())
+    .map((flight: Flight) => {
+        this.notification.sendFlightNotification();
         return new Flight(flight._id, flight.name, flight.date, flight.departure, flight.arrival, flight.location);
       });
   }
@@ -39,6 +42,7 @@ export class FlightService {
     return this.http.post(url, data, this.getRequestOptions())
       .map(r => r.json())
       .map((savedFlight: Flight) => {
+        this.notification.sendFlightNotification();
         return new Flight(savedFlight._id, savedFlight.name, savedFlight.date, savedFlight.departure, savedFlight.arrival, savedFlight.location);
       });
   }
