@@ -29,7 +29,7 @@ export class FlightListComponent extends BaseComponent implements OnInit {
   }
 
   onNewFlight() {
-    this.router.navigate(['new'], { relativeTo: this.route });
+    this.router.navigate(['new']);
   }
 
 }

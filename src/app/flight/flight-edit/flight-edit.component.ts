@@ -35,8 +35,8 @@ export class FlightEditComponent extends BaseComponent implements OnInit {
   }
 
   onSubmit() {
-    const {id, name} = this.flightForm.value;
-    const flight = new Flight(id, name);
+    const {id, name, date, departure, arrival, location} = this.flightForm.value;
+    const flight = new Flight(id, name, date, departure, arrival, location);
 
     flight._id = this.id;
 
@@ -59,25 +59,41 @@ export class FlightEditComponent extends BaseComponent implements OnInit {
 
   private loadFlight() {
     let flightName = '';
+    let flightDate = '';
+    let flightDeparture = '';
+    let flightArrival = '';
+    let flightLocation = '';
 
-    this.initForm(flightName);
+    this.initForm(flightName, flightDate, flightDeparture, flightArrival, flightLocation);
 
     if (this.editMode) {
       this.flightService.getFlight(this.id)
         .subscribe((response) => {
           const flight = response;
           flightName = flight.name || '';
+          flightDate = flight.date || '';
+          flightDeparture = flight.departure || '';
+          flightArrival = flight.arrival || '';
+          flightLocation = flight.location || '';
 
           this.flightForm.setValue({
-            'name': flight.name
+            'name': flight.name,
+            'date': flight.date,
+            'departure': flight.departure,
+            'arrival': flight.arrival,
+            'location': flight.location
           });
         });
     }
   }
 
-  private initForm(flightName) {
+  private initForm(flightName, flightDate, flightDeparture, flightArrival, flightLocation) {
     this.flightForm = new FormGroup({
-      'name': new FormControl(flightName, Validators.required)
+      'name': new FormControl(flightName, Validators.required),
+      'date': new FormControl(flightDate, Validators.required),
+      'departure': new FormControl(flightDeparture, Validators.required),
+      'arrival': new FormControl(flightArrival, Validators.required),
+      'location': new FormControl(flightLocation, Validators.required)
     });
   }
 

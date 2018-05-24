@@ -20,7 +20,7 @@ export class FlightService {
     return this.http.get(url, this.getRequestOptions())
       .map(r => r.json())
       .map((flight: Flight[]) => {
-        return flight.map(flight => new Flight(flight._id, flight.name));
+        return flight.map(flight => new Flight(flight._id, flight.name, flight.date, flight.departure, flight.arrival, flight.location));
       });
   }
 
@@ -29,7 +29,7 @@ export class FlightService {
     return this.http.get(url, this.getRequestOptions())
       .map(r => r.json())
       .map((flight: Flight) => {
-        return new Flight(flight._id, flight.name);
+        return new Flight(flight._id, flight.name, flight.date, flight.departure, flight.arrival, flight.location);
       });
   }
 
@@ -39,7 +39,7 @@ export class FlightService {
     return this.http.post(url, data, this.getRequestOptions())
       .map(r => r.json())
       .map((savedFlight: Flight) => {
-        return new Flight(savedFlight._id, savedFlight.name);
+        return new Flight(savedFlight._id, savedFlight.name, savedFlight.date, savedFlight.departure, savedFlight.arrival, savedFlight.location);
       });
   }
 
@@ -49,7 +49,7 @@ export class FlightService {
     return this.http.put(url, data, this.getRequestOptions())
       .map(r => r.json())
       .map((savedFlight: Flight) => {
-        return new Flight(savedFlight._id, savedFlight.name);
+        return new Flight(savedFlight._id, savedFlight.name, savedFlight.date, savedFlight.departure, savedFlight.arrival, savedFlight.location);
       });
   }
 
