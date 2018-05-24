@@ -14,14 +14,13 @@ export class FlightService {
   flightUpdated = new Subject<Flight>();
   flightDeleted = new Subject<string>();
 
-  constructor(private http: Http, private notification: NotificationSender) { }
+  constructor(private http: Http) { }
 
   getFlights(): Observable<Flight[]> {
     const url = `${environment.apiUrl}/flights`;
     return this.http.get(url, this.getRequestOptions())
       .map(r => r.json())
       .map((flight: Flight[]) => {
-        this.notification.sendFlightNotification();
         return flight.map(flight => new Flight(flight._id, flight.name, flight.date, flight.departure, flight.arrival, flight.location));
       });
   }
@@ -31,7 +30,6 @@ export class FlightService {
     return this.http.get(url, this.getRequestOptions())
     .map(r => r.json())
     .map((flight: Flight) => {
-        this.notification.sendFlightNotification();
         return new Flight(flight._id, flight.name, flight.date, flight.departure, flight.arrival, flight.location);
       });
   }
@@ -42,7 +40,6 @@ export class FlightService {
     return this.http.post(url, data, this.getRequestOptions())
       .map(r => r.json())
       .map((savedFlight: Flight) => {
-        this.notification.sendFlightNotification();
         return new Flight(savedFlight._id, savedFlight.name, savedFlight.date, savedFlight.departure, savedFlight.arrival, savedFlight.location);
       });
   }
@@ -52,10 +49,9 @@ export class FlightService {
     const data = JSON.stringify(flight);
     console.log(url);
     console.log(data);
-    return this.http.post(url, data, this.getRequestOptions())
+    return this.http.put(url, data, this.getRequestOptions())
       .map(r => r.json())
       .map((savedFlight: Flight) => {
-        console.log("test");
         return new Flight(savedFlight._id, savedFlight.name, savedFlight.date, savedFlight.departure, savedFlight.arrival, savedFlight.location);
       });
   }
